@@ -9,9 +9,10 @@ export default class CreateUserSales1606346320079
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'username',
@@ -50,7 +51,7 @@ export default class CreateUserSales1606346320079
           },
           {
             name: 'contact',
-            type: 'int',
+            type: 'varchar',
             isNullable: false,
           },
           {

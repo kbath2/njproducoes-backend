@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   Column,
   CreateDateColumn,
@@ -9,31 +10,31 @@ import {
 @Entity('user_sales')
 class UserSales {
   @PrimaryGeneratedColumn('uuid')
-  id: 'string';
+  id: string;
 
   @Column()
-  username: 'string';
+  username: string;
 
   @Column()
-  name: 'string';
+  name: string;
 
   @Column()
-  cnpj: 'string';
+  cnpj: string;
 
   @Column()
-  cpf: 'string';
+  cpf: string;
 
   @Column()
-  email: 'string';
+  email: string;
 
   @Column()
-  password: 'string';
+  password: string;
 
   @Column()
-  preferences: 'string';
+  preferences: string;
 
   @Column()
-  contact: 'number';
+  contact: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -41,3 +42,5 @@ class UserSales {
   @UpdateDateColumn()
   update_at: Date;
 }
+
+export default UserSales;
