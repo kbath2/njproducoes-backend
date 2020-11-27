@@ -27,13 +27,39 @@ class CreateUserSalesService {
   }: Request): Promise<UserSales> {
     const userSalesRepository = getRepository(UserSales);
 
+    // Validações
     const checkEmailExists = await userSalesRepository.findOne({
       where: { email },
     });
 
     if (checkEmailExists) {
-      throw new Error('Email já cadastrado');
+      throw new Error('Email já cadastrado no sistema');
     }
+
+    const checkCnpjExists = await userSalesRepository.findOne({
+      where: { cnpj },
+    });
+
+    if (checkCnpjExists) {
+      throw new Error('CNPJ já cadastrado no sistema');
+    }
+
+    const checkCpfExists = await userSalesRepository.findOne({
+      where: { cpf },
+    });
+
+    if (checkCpfExists) {
+      throw new Error('CPF já cadastrado no sistema');
+    }
+
+    const checkUsernameExists = await userSalesRepository.findOne({
+      where: { username },
+    });
+
+    if (checkUsernameExists) {
+      throw new Error('Username já cadastrado no sistema');
+    }
+    // fim das validações
 
     const hashedPassword = await hash(password, 8);
 

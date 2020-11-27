@@ -18,6 +18,7 @@ usersRouter.post('/', async (req, res) => {
     } = req.body;
 
     const createUser = new CreateUserSalesService();
+    const usernames = req.body.username;
 
     const user = await createUser.execute({
       username,
@@ -30,7 +31,10 @@ usersRouter.post('/', async (req, res) => {
       contact,
     });
 
-    return res.json(user);
+    return res.send(
+      `Usuario ${usernames} cadastrado com sucesso no sistema,
+      em breve recebera um e-mail para confirmação do cadastro`,
+    );
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
