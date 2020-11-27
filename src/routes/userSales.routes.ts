@@ -2,9 +2,9 @@ import { Router } from 'express';
 
 import CreateUserSalesService from '../services/CreateUserSalesService';
 
-const usersRouter = Router();
+const userSalesRouter = Router();
 
-usersRouter.post('/', async (req, res) => {
+userSalesRouter.post('/', async (req, res) => {
   try {
     const {
       username,
@@ -17,10 +17,10 @@ usersRouter.post('/', async (req, res) => {
       contact,
     } = req.body;
 
-    const createUser = new CreateUserSalesService();
+    const createUserSales = new CreateUserSalesService();
     const usernames = req.body.username;
 
-    const user = await createUser.execute({
+    const user = await createUserSales.execute({
       username,
       name,
       cnpj,
@@ -40,4 +40,4 @@ usersRouter.post('/', async (req, res) => {
   }
 });
 
-export default usersRouter;
+export default userSalesRouter;
