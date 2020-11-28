@@ -2,6 +2,7 @@ import { compare } from 'bcryptjs';
 import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 
+import authConfig from '../config/auth';
 import Users from '../model/UserSales';
 
 interface Request {
@@ -30,9 +31,11 @@ class AuthUserSalesService {
       throw new Error('Email/Password invalido');
     }
 
-    const token = sign({}, '3f5ade7fc584598768daf4f69c9d593e', {
+    const { secret, expiresIn } = authConfig.jwt;
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn,
     });
 
     return {
