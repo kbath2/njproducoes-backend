@@ -56,6 +56,11 @@ export default class CreateUserSales1606346320079
             isNullable: false,
           },
           {
+            name: 'avatar',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

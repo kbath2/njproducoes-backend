@@ -30,6 +30,9 @@ class Users {
   @Column()
   contact: string;
 
+  @Column()
+  avatar: string;
+
   @CreateDateColumn()
   created_at: Date;
 
