@@ -3,6 +3,12 @@ import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
+interface TokenPayload {
+  iat: number;
+  exp: number;
+  sub: number;
+}
+
 export default function ensureAuth(
   req: Request,
   res: Response,
@@ -18,7 +24,13 @@ export default function ensureAuth(
 
   try {
     const decoded = verify(token, authConfig.jwt.secret);
-    console.log(decoded);
+
+    // força um tipo de variavel
+    const { sub } = decoded as TokenPayload;
+
+    req.user = {
+      id: sub,
+    };
 
     return next();
   } catch {
