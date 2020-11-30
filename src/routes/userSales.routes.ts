@@ -1,8 +1,12 @@
 import { Router } from 'express';
+import multer from 'multer';
+import uploadConfig from '../config/upload';
 
 import CreateUserSalesService from '../services/CreateUserSalesService';
+import ensureAuth from '../middlewares/ensureAuth';
 
 const userSalesRouter = Router();
+const upload = multer(uploadConfig);
 
 userSalesRouter.post('/', async (req, res) => {
   try {
@@ -39,5 +43,14 @@ userSalesRouter.post('/', async (req, res) => {
     return res.status(400).json({ error: err.message });
   }
 });
+
+userSalesRouter.patch(
+  '/avatar',
+  ensureAuth,
+  upload.single('avatar'),
+  async (req, res) => {
+    return res.json({ ok: true });
+  },
+);
 
 export default userSalesRouter;
