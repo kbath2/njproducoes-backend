@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
 import Users from '../model/Users';
+import AppError from '../err/AppError';
 
 interface Request {
   username: string;
@@ -29,7 +30,7 @@ class CreateUsersService {
     });
 
     if (checkEmailExists) {
-      throw new Error('Email já cadastrado no sistema');
+      throw new AppError('Email já cadastrado no sistema');
     }
 
     const checkUsernameExists = await usersRepository.findOne({
@@ -37,7 +38,7 @@ class CreateUsersService {
     });
 
     if (checkUsernameExists) {
-      throw new Error('Username já cadastrado no sistema');
+      throw new AppError('Username já cadastrado no sistema');
     }
     // fim das validações
 

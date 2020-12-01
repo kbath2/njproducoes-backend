@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
 import UserSales from '../model/UserSales';
+import AppError from '../err/AppError';
 
 interface Request {
   username: string;
@@ -33,7 +34,7 @@ class CreateUserSalesService {
     });
 
     if (checkEmailExists) {
-      throw new Error('Email já cadastrado no sistema');
+      throw new AppError('Email já cadastrado no sistema');
     }
 
     const checkCnpjExists = await userSalesRepository.findOne({
@@ -41,7 +42,7 @@ class CreateUserSalesService {
     });
 
     if (checkCnpjExists) {
-      throw new Error('CNPJ já cadastrado no sistema');
+      throw new AppError('CNPJ já cadastrado no sistema');
     }
 
     const checkCpfExists = await userSalesRepository.findOne({
@@ -49,7 +50,7 @@ class CreateUserSalesService {
     });
 
     if (checkCpfExists) {
-      throw new Error('CPF já cadastrado no sistema');
+      throw new AppError('CPF já cadastrado no sistema');
     }
 
     const checkUsernameExists = await userSalesRepository.findOne({
@@ -57,7 +58,7 @@ class CreateUserSalesService {
     });
 
     if (checkUsernameExists) {
-      throw new Error('Username já cadastrado no sistema');
+      throw new AppError('Username já cadastrado no sistema');
     }
     // fim das validações
 

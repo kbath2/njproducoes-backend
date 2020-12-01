@@ -4,6 +4,7 @@ import { sign } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 import Users from '../model/UserSales';
+import AppError from '../err/AppError';
 
 interface Request {
   username: string;
@@ -22,13 +23,13 @@ class AuthUserSalesService {
     });
 
     if (!user) {
-      throw new Error('Username/Password invalido');
+      throw new AppError('Username/Password invalido', 401);
     }
 
     const passwordMatched = await compare(password, user.password);
 
     if (!passwordMatched) {
-      throw new Error('Email/Password invalido');
+      throw new AppError('Username/Password invalido', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
