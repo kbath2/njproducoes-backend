@@ -3,8 +3,8 @@
     "host": "localhost",
     "port": 5434,
     "username": "postgres",
-    "password": "#docker22@",
-    "database": "nj_producoes",
+    "password": "docker",
+    "database": "dfbeat_postgres",
     "entities": [
         "./src/model/*.ts"
     ],

@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import cors from 'cors';
 import routes from './routes';
 
 import uploadConfig from './config/upload';
@@ -9,6 +10,7 @@ import './database';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
@@ -29,6 +31,6 @@ app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
   });
 });
 
-app.listen(3333, () => {
-  console.log('✔️ Server started on port 3333!');
+app.listen(3334, () => {
+  console.log('✔️ Server started on port 3334!');
 });

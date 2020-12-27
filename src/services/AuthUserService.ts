@@ -7,7 +7,7 @@ import Users from '../model/Users';
 import AppError from '../err/AppError';
 
 interface Request {
-  username: string;
+  email: string;
   password: string;
 }
 interface Response {
@@ -15,11 +15,11 @@ interface Response {
   token: string;
 }
 class AuthenticateUserService {
-  public async execute({ username, password }: Request): Promise<Response> {
+  public async execute({ email, password }: Request): Promise<Response> {
     const usersRepository = getRepository(Users);
 
     const user = await usersRepository.findOne({
-      where: { username },
+      where: { email },
     });
 
     if (!user) {
